@@ -10,45 +10,51 @@ using System.IO;
 namespace ContactsApp
 {
     /// <summary>
-    /// Класс, реализующий метод для сохранения объекта «Проект» в файл и метод загрузки проекта из файла.
+    /// Класс, реализующий сериализацию проекта с контактами.
     /// </summary>
-    public class ProjectManager
+    public static class ProjectManager
     {
         /// <summary>
         /// Путь к файлу, в котором хранятся данные проекта.
         /// </summary>
-        private const string FilePath = @"C:\My Documents\ContactsApp.notes";
+        private const string FilePath = @".\Save.json";
 
         /// <summary>
         /// Метод для сохранения объекта «Проект» в файл.
         /// </summary>
-        public void SaveProject(Project project)
+        /// /// <param name="project"></param>
+        public static void SaveProject(Project project)
         {
-            // Преобразование объекта в JSON-строку.
-            string jsonData = JsonConvert.SerializeObject(project);
-
-            // Сохранение JSON-строки в файл.
-            File.WriteAllText(FilePath, jsonData); 
+            JsonSerializer serializer = new JsonSerializer();
+            using (StreamWriter sw = new StreamWriter(FilePath))
+            using (JsonWriter writer = new JsonTextWriter(sw))
+            {
+                serializer.Serialize(writer, project);
+            }
         }
 
         /// <summary>
         /// Метод для загрузки объекта «Проект» из файла.
         /// </summary>
-        public Project LoadProject()
+        /// <returns>Эксземпляр класса Project из файла</returns>
+        public static Project LoadProject()
         {
-            // Проверка наличия файла
-            if (File.Exists(FilePath)) 
+            Project project = null;
+            try
             {
-                // Загрузка JSON-строки из файла
-                string jsonData = File.ReadAllText(FilePath);
+                JsonSerializer serializer = new JsonSerializer();
+                using (StreamReader sr = new StreamReader(FilePath))
+                using (JsonReader reader = new JsonTextReader(sr))
+                {
+                    project = (Project)serializer.Deserialize<Project>(reader);
+                }
+            }
+            catch (FileNotFoundException)
+            {
+                Console.WriteLine("Файл проекта не найден.");
+            }
 
-                // Преобразование JSON-строки в объект типа Project
-                return JsonConvert.DeserializeObject<Project>(jsonData); 
-            }
-            else
-            {
-                throw new FileNotFoundException("Файл не найден");
-            }
+            return project;
         }
     }
 }

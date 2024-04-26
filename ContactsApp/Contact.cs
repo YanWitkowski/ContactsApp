@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data;
+using System.Xml.Linq;
 
 namespace ContactsApp 
 {
@@ -11,11 +13,31 @@ namespace ContactsApp
     /// </summary>
     public class Contact : ICloneable
     {
-        private string _lastName;
-        private string _firstName;
-        private DateTime _birthDate;
-        private string _email;
-        private string _idVk;
+        string _lastName;
+        string _firstName;
+        DateTime _birthDate;
+        string _email;
+        string _idVk;
+        PhoneNumber _phoneNumber;
+
+        /// <summary>
+        /// Конструктор класса Contact
+        /// </summary>
+        /// <param name="lastName">Фамилия</param>
+        /// <param name="firstName">Имя</param>
+        /// <param name="birthDate">Дата рождения</param>
+        /// <param name="email">E-mail</param>
+        /// <param name="idVk">ID Вконтакте</param>
+        /// <param name="phoneNumber">Номер телефона</param>
+        public Contact(string lastName, string firstName, DateTime birthDate, string email, string idVk, PhoneNumber phoneNumber)
+        {
+            LastName = lastName;
+            FirstName = firstName;
+            BirthDate = birthDate;
+            Email = email;
+            ID_VK = idVk;
+            PhoneNumber = phoneNumber;
+        }
 
         /// <summary>
         /// Метод для проверки количества символов.
@@ -40,7 +62,7 @@ namespace ContactsApp
         /// </summary>
         public string LastName
         {
-            get { return _lastName; }
+            get => _lastName; 
             set
             {
                 if (!string.IsNullOrEmpty(value))
@@ -56,7 +78,7 @@ namespace ContactsApp
         /// </summary>
         public string FirstName
         {
-            get { return _firstName; }
+            get => _firstName; 
             set
             {
                 if (!string.IsNullOrEmpty(value))
@@ -72,7 +94,7 @@ namespace ContactsApp
         /// </summary>
         public DateTime BirthDate
         {
-            get { return _birthDate; }
+            get => _birthDate;
             set
             {
                 DateTime currentDate = DateTime.Now;
@@ -94,7 +116,7 @@ namespace ContactsApp
         /// </summary>
         public string Email
         {
-            get { return _email; }
+            get => _email;
             set
             {
                 CheckMaxLength(value, 50, "E-mail не должен превышать 50 символов");
@@ -107,7 +129,7 @@ namespace ContactsApp
         /// </summary>
         public string ID_VK
         {
-            get { return _idVk; }
+            get => _idVk; 
             set
             {
                 CheckMaxLength(value, 15, "ID-Вконтакте не должен превышать 15 символов");
@@ -116,27 +138,18 @@ namespace ContactsApp
         }
 
         /// <summary>
-        /// Класс, хранящий информацию о номере телефона
+        /// Возвращает и задает номер телефона.
         /// </summary>
-        public PhoneNumber Phone { get; set; }
-
-        /// <summary>
-        /// Конструктор класса Contact
-        /// </summary>
-        /// <param name="lastName">Фамилия</param>
-        /// <param name="firstName">Имя</param>
-        /// <param name="birthDate">Дата рождения</param>
-        /// <param name="email">E-mail</param>
-        /// <param name="idVk">ID Вконтакте</param>
-        /// <param name="phoneNumber">Номер телефона</param>
-        public Contact(string lastName, string firstName, DateTime birthDate, string email, string idVk, PhoneNumber phoneNumber)
+        public PhoneNumber PhoneNumber
         {
-            LastName = lastName;
-            FirstName = firstName;
-            BirthDate = birthDate;
-            Email = email;
-            ID_VK = idVk;
-            Phone = phoneNumber;
+            get => _phoneNumber;
+            set
+            {
+                if (!string.IsNullOrEmpty(value.ToString()))
+                {
+                    _phoneNumber = value;
+                }
+            }
         }
 
         /// <summary>
@@ -145,8 +158,7 @@ namespace ContactsApp
         /// <returns>Клон объекта Contact</returns>
         public object Clone()
         {
-                return new Contact(this.LastName, this.FirstName, this.BirthDate, this.Email, this.ID_VK,
-                    (PhoneNumber)this.Phone.Clone());
+                return new Contact(LastName, FirstName, BirthDate, Email, ID_VK, PhoneNumber);
         }
     }
 }

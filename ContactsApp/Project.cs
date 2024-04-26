@@ -3,47 +3,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 
 namespace ContactsApp
 {
     /// <summary>
-    /// Класс, хранящий список всех контактов.
+    /// Класс, содержащий контакты.
     /// </summary>
     public class Project
     {
-        private List<Contact> contacts;
+        /// <summary>
+        /// Хранит контакты в виде словаря со строковыми ключами и значениями типа Contact.
+        /// </summary>
+        private Dictionary<string, Contact> _contacts;
+
+        /// <summary>
+        /// Возвращает или устанавливает словарь контактов.
+        /// </summary>
+        public Dictionary<string, Contact> Contacts { get => _contacts; set => _contacts = value; }
 
         /// <summary>
         /// Создает новый экземпляр класса Project.
         /// </summary>
-        public Project()
-        {
-            contacts = new List<Contact>(); 
-        }
-
-        /// <summary>
-        /// Добавляет контакт в хранилище.
-        /// </summary>
-        public void AddContact(Contact contact) 
-        {
-            contacts.Add(contact);
-        }
-
-        /// <summary>
-        /// Удаляет контакт из хранилища.
-        /// </summary>
-        public void RemoveContact(Contact contact)
-        {
-            contacts.Remove(contact);  
-        }
-
-        /// <summary>
-        /// Возвращает список всех контактов в хранилище.
-        /// </summary>
-        public List<Contact> GetAllContacts()
-        {
-            return contacts;
-        }
+        /// <param name="contacts">Словарь контактов.</param>
+        public Project(Dictionary<string, Contact> contacts)
+            {
+                Contacts = contacts;
+            }
     }
 }

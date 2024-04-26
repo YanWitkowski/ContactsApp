@@ -9,17 +9,17 @@ namespace ContactsApp
     /// <summary>
     /// Класс, хранящий информацию о номере телефона.
     /// </summary>
-    public class PhoneNumber : ICloneable
+    public class PhoneNumber 
     {
-        private string _phoneNumber;
+        private string _phone;
 
         /// <summary>
         /// Конструктор класса PhoneNumber.
         /// </summary>
         /// <param name="phoneNumber">Номер телефона</param>
-        public PhoneNumber(string phoneNumber)
+        public PhoneNumber(string phone)
         {
-            Phone = phoneNumber;
+            Phone = phone;
         }
 
         /// <summary>
@@ -27,13 +27,12 @@ namespace ContactsApp
         /// </summary>
         public string Phone
         {
-            get
-            { return _phoneNumber; }
+            get => _phone; 
             set
             {
                 if (value.StartsWith("+7") && value.Length == 12 && value.Substring(1).All(char.IsDigit))
                 {
-                    _phoneNumber = value;
+                    _phone = value;
                 }
                 else
                 {
@@ -42,15 +41,6 @@ namespace ContactsApp
             }
         }
 
-        /// <summary>
-        /// Метод клонирования объекта PhoneNumber
-        /// </summary>
-        /// <returns>Клон объекта PhoneNumber</returns>
-        public object Clone()
-        {
-            return new PhoneNumber(Phone);
-
-        }
     }
     
 }

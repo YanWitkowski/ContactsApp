@@ -8,9 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using ContactsApp;
-using Newtonsoft.Json;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace ContactsAppUI
 {
@@ -20,36 +19,70 @@ namespace ContactsAppUI
 
         public MainForm()
         {
-            try
-            {
                 InitializeComponent();
-                _contact = new Contact("Петров", "Сергей",
-                    new DateTime(1999, 12, 1), "petrovsergey1980@gmail.com",
-                    "petrov1980", new PhoneNumber("+79189007866"));
-            }
-            catch (ArgumentException ex)
-            {
-                MessageBox.Show("Ошибка: " + ex.Message);
-            }
+        }
+          
+        private void lastNameTextBox_TextChanged(object sender, EventArgs e)
+        {
 
-            string filePath = Path.Combine(Environment.CurrentDirectory, "json.txt");
-            JsonSerializerHelper jsonHelper = new JsonSerializerHelper();
+        }
+        private void firstNameTextBox_TextChanged(object sender, EventArgs e)
+        {
 
-            // Сериализация объекта
-            jsonHelper.SerializeObject(_contact, filePath);
+        } 
+        void birthDateTimePicker_ValueChanged(object sender, EventArgs e)
+        {
 
-            // Десериализация объекта
-            Contact contact = jsonHelper.DeserializeObject<Contact>(filePath);
+        }
 
-            if (contact != null)
-            {
-                MessageBox.Show("Данные контакта: " + contact.ToString());
-            }
+        private void emailTextBox_TextChanged(object sender, EventArgs e)
+        {
 
-            else
-            {
-                MessageBox.Show("Файл не найден!");
-            }
+        }
+
+        private void VKTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        } 
+       
+        private void phoneTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+
+        private void saveButton_Click(object sender, EventArgs e)
+        {
+            string lastName = lastNameTextBox.Text;
+            string firstName = firstNameTextBox.Text;
+            DateTime birthDate = birthDateTimePicker.Value;
+            string email = emailTextBox.Text;
+            string idVk = VKTextBox.Text;
+            PhoneNumber phoneNumber = new PhoneNumber(phoneTextBox.Text);
+            Contact contact = new Contact(lastName, firstName, birthDate, email, idVk, phoneNumber);
+
+            var contacts = new Dictionary<string, Contact>();
+            contacts.Add("0", contact);
+
+            Project project = new Project(contacts);
+
+            ProjectManager.SaveProject(project);
+            MessageBox.Show("Сохранено");
+
+        }
+
+        private void loadButton_Click(object sender, EventArgs e)
+        {
+            Project project = ProjectManager.LoadProject();
+
+            var contact = project.Contacts["0"];
+
+            firstNameTextBox.Text = contact.FirstName;
+            lastNameTextBox.Text = contact.LastName;
+            emailTextBox.Text = contact.Email;
+            VKTextBox.Text = contact.ID_VK;
+            birthDateTimePicker.Value = contact.BirthDate;
+            phoneTextBox.Text = contact.PhoneNumber.Phone;
         }
     }
 }
