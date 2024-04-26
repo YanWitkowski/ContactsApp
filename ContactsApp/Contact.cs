@@ -47,6 +47,11 @@ namespace ContactsApp
         /// <param name="errorMessage">Сообщение об ошибке</param>
         private void CheckMaxLength(string value, int maxLength, string errorMessage)
         {
+            //if (maxLength == 0)
+            //{
+            //    throw new ArgumentException("Максимальная длина строки не может быть нулевой.");
+            //}
+
             if (value.Length <= maxLength)
             {
                 return;
@@ -67,7 +72,11 @@ namespace ContactsApp
             {
                 if (!string.IsNullOrEmpty(value))
                 {
-                    CheckMaxLength(value, 50, "Фамилия не должна превышать 50 символов");
+                    if (value != null)
+                    {
+                        CheckMaxLength(value, 50, "Фамилия не должна превышать 50 символов");
+                    }
+
                     _lastName = char.ToUpper(value[0]) + value.Substring(1);
                 }
             }
@@ -83,7 +92,11 @@ namespace ContactsApp
             {
                 if (!string.IsNullOrEmpty(value))
                 {
-                    CheckMaxLength(value, 50, "Имя не должно превышать 50 символов");
+                    if (value != null)
+                    {
+                        CheckMaxLength(value, 50, "Имя не должно превышать 50 символов");
+                    }
+
                     _firstName = char.ToUpper(value[0]) + value.Substring(1);
                 }
             }
@@ -119,7 +132,11 @@ namespace ContactsApp
             get => _email;
             set
             {
-                CheckMaxLength(value, 50, "E-mail не должен превышать 50 символов");
+                if (value != null)
+                {
+                    CheckMaxLength(value, 50, "E-mail не должен превышать 50 символов");
+                }
+
                 _email = value;
             }
         }
@@ -132,7 +149,11 @@ namespace ContactsApp
             get => _idVk; 
             set
             {
-                CheckMaxLength(value, 15, "ID-Вконтакте не должен превышать 15 символов");
+                if (value != null)
+                {
+                    CheckMaxLength(value, 15, "ID-Вконтакте не должен превышать 15 символов");
+                }
+
                 _idVk = value;
             }
         }

@@ -17,8 +17,9 @@ namespace ContactsApp
         /// <summary>
         /// Путь к файлу, в котором хранятся данные проекта.
         /// </summary>
-        private const string FilePath = @".\Save.json";
-
+        /// C:\Users\USER\source\repos\ContactsApp
+        //private const string FilePath = @".\Save.json";
+        private const string FilePath = @"C:\Users\USER\source\repos\ContactsApp\Save.json";
         /// <summary>
         /// Метод для сохранения объекта «Проект» в файл.
         /// </summary>
@@ -46,7 +47,14 @@ namespace ContactsApp
                 using (StreamReader sr = new StreamReader(FilePath))
                 using (JsonReader reader = new JsonTextReader(sr))
                 {
-                    project = (Project)serializer.Deserialize<Project>(reader);
+                    project = serializer.Deserialize<Project>(reader);  // Инициализация объекта Project
+                    // Инициализация дочерних объектов (если необходимо)
+                    foreach (Contact contact in project.Contacts.Values)
+                    {
+                        contact.PhoneNumber = new PhoneNumber(contact.PhoneNumber.Phone);
+                    }
+
+                    //    project = (Project)serializer.Deserialize<Project>(reader);
                 }
             }
             catch (FileNotFoundException)

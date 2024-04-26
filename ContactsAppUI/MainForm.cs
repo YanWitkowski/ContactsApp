@@ -75,7 +75,9 @@ namespace ContactsAppUI
         {
             Project project = ProjectManager.LoadProject();
 
-            var contact = project.Contacts["0"];
+            if (project.Contacts.ContainsKey("0"))
+            {
+                var contact = project.Contacts["0"];
 
             firstNameTextBox.Text = contact.FirstName;
             lastNameTextBox.Text = contact.LastName;
@@ -83,6 +85,11 @@ namespace ContactsAppUI
             VKTextBox.Text = contact.ID_VK;
             birthDateTimePicker.Value = contact.BirthDate;
             phoneTextBox.Text = contact.PhoneNumber.Phone;
+            }
+            else
+            {
+                MessageBox.Show("Контакт с ключом \"0\" не найден.", "Ошибка");
+            }
         }
     }
 }
