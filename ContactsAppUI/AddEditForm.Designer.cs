@@ -179,6 +179,7 @@
             this.cancelButton.TabIndex = 16;
             this.cancelButton.Text = "Отмена";
             this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // OKButton
             // 
@@ -188,6 +189,7 @@
             this.OKButton.TabIndex = 15;
             this.OKButton.Text = "Ок";
             this.OKButton.UseVisualStyleBackColor = true;
+            this.OKButton.Click += new System.EventHandler(this.OKButton_Click);
             // 
             // AddEditForm
             // 
@@ -199,6 +201,7 @@
             this.Controls.Add(this.OKButton);
             this.Name = "AddEditForm";
             this.Text = "Добавить/изменить контакт";
+            this.Shown += new System.EventHandler(this.AddEditForm_Shown);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
