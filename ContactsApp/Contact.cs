@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using System.Xml.Linq;
+using System.Text.RegularExpressions;
 
 namespace ContactsApp 
 {
@@ -42,7 +43,7 @@ namespace ContactsApp
         /// <summary>
         /// Метод для проверки количества символов.
         /// </summary>
-        ///  /// <param name="value">Строка для проверки</param>
+        /// <param name="value">Строка для проверки</param>
         /// <param name="maxLength">Максимальная длина строки</param>
         /// <param name="errorMessage">Сообщение об ошибке</param>
         private void CheckMaxLength(string value, int maxLength, string errorMessage)
@@ -63,6 +64,26 @@ namespace ContactsApp
         }
 
         /// <summary>
+        /// Метод для проверки кириллических символов.
+        /// </summary>
+        /// <param name="input">Строка для проверки</param>
+        private bool ContainsCyrillic(string input)
+        {
+            Regex regex = new Regex(@"\p{IsCyrillic}");
+            return regex.IsMatch(input);
+        }
+
+        /// <summary>
+        /// Метод для проверки на допустимые символы для e-mail.
+        /// </summary>
+        /// <param name="email">e-mail для проверки</param>
+        private bool IsValidEmail(string email)
+        {
+            Regex regex = new Regex(@"^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z0-9]+$");
+            return regex.IsMatch(email);
+        }
+
+        /// <summary>
         /// Возвращает и задает фамилию.
         /// </summary>
         public string LastName
@@ -70,11 +91,24 @@ namespace ContactsApp
             get => _lastName; 
             set
             {
+                // Проверка на пустое значение
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException("Фамилия не может быть пустой");
+                }
+
                 if (!string.IsNullOrEmpty(value))
                 {
                     if (value != null)
                     {
                         CheckMaxLength(value, 50, "Фамилия не должна превышать 50 символов");
+                        foreach (char c in value)
+                        {
+                            if (!char.IsLetter(c)) // Проверка, что символ не является буквой
+                            {
+                                throw new ArgumentException("Фамилия должна содержать только буквы");
+                            }
+                        }
                     }
 
                     _lastName = char.ToUpper(value[0]) + value.Substring(1);
@@ -90,11 +124,24 @@ namespace ContactsApp
             get => _firstName; 
             set
             {
+                // Проверка на пустое значение
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException("Имя не может быть пустым");
+                }
+
                 if (!string.IsNullOrEmpty(value))
                 {
                     if (value != null)
                     {
                         CheckMaxLength(value, 50, "Имя не должно превышать 50 символов");
+                        foreach (char c in value)
+                        {
+                            if (!char.IsLetter(c)) // Проверка, что символ не является буквой
+                            {
+                                throw new ArgumentException("Имя должно содержать только буквы");
+                            }
+                        }
                     }
 
                     _firstName = char.ToUpper(value[0]) + value.Substring(1);
@@ -132,12 +179,29 @@ namespace ContactsApp
             get => _email;
             set
             {
+                // Проверка на пустое значение
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException("Email не может быть пустым");
+                }
+
                 if (value != null)
                 {
                     CheckMaxLength(value, 50, "E-mail не должен превышать 50 символов");
+                    if (ContainsCyrillic(value))
+                    {
+                        throw new ArgumentException("Email не может содержать кириллические символы");
+                    }
                 }
 
-                _email = value;
+                if (IsValidEmail(value))
+                {
+                    _email = value;
+                }
+                else
+                {
+                    throw new ArgumentException("Введите корректный Email");
+                }
             }
         }
 
@@ -149,9 +213,19 @@ namespace ContactsApp
             get => _idVk; 
             set
             {
+                // Проверка на пустое значение
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException("ID-Вконтакте не может быть пустым");
+                }
+
                 if (value != null)
                 {
                     CheckMaxLength(value, 15, "ID-Вконтакте не должен превышать 15 символов");
+                    if (ContainsCyrillic(value))
+                    {
+                        throw new ArgumentException("ID-Вконтакте не может содержать кириллические символы");
+                    }
                 }
 
                 _idVk = value;
