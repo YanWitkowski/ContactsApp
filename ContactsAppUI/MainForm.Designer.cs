@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.firstNameTextBox = new System.Windows.Forms.TextBox();
             this.lastNameTextBox = new System.Windows.Forms.TextBox();
             this.birthDateTimePicker = new System.Windows.Forms.DateTimePicker();
@@ -42,61 +44,88 @@
             this.emailLabel = new System.Windows.Forms.Label();
             this.VKIDLabel = new System.Windows.Forms.Label();
             this.phoneNumberLabel = new System.Windows.Forms.Label();
+            this.splitContainerMain = new System.Windows.Forms.SplitContainer();
+            this.vScrollBarContacts = new System.Windows.Forms.VScrollBar();
+            this.listBoxContacts = new System.Windows.Forms.ListBox();
+            this.textBoxFind = new System.Windows.Forms.TextBox();
+            this.labelFind = new System.Windows.Forms.Label();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.menuStripMain = new System.Windows.Forms.MenuStrip();
+            this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.выйтиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.редактироватьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.создатьКонтактToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.редактироватьКонтактToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.удалитьКонтактToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.помощьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.оПрограммеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMain = new System.Windows.Forms.ToolStrip();
+            this.toolStripButtonAdd = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonEdit = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonDelete = new System.Windows.Forms.ToolStripButton();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerMain)).BeginInit();
+            this.splitContainerMain.Panel1.SuspendLayout();
+            this.splitContainerMain.Panel2.SuspendLayout();
+            this.splitContainerMain.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.menuStripMain.SuspendLayout();
+            this.toolStripMain.SuspendLayout();
             this.SuspendLayout();
             // 
             // firstNameTextBox
             // 
-            this.firstNameTextBox.Location = new System.Drawing.Point(297, 86);
+            this.firstNameTextBox.Location = new System.Drawing.Point(128, 36);
             this.firstNameTextBox.Name = "firstNameTextBox";
-            this.firstNameTextBox.Size = new System.Drawing.Size(200, 22);
+            this.firstNameTextBox.Size = new System.Drawing.Size(220, 22);
             this.firstNameTextBox.TabIndex = 0;
             this.firstNameTextBox.TextChanged += new System.EventHandler(this.firstNameTextBox_TextChanged);
             // 
             // lastNameTextBox
             // 
-            this.lastNameTextBox.Location = new System.Drawing.Point(297, 38);
+            this.lastNameTextBox.Location = new System.Drawing.Point(128, 3);
             this.lastNameTextBox.Name = "lastNameTextBox";
-            this.lastNameTextBox.Size = new System.Drawing.Size(200, 22);
+            this.lastNameTextBox.Size = new System.Drawing.Size(220, 22);
             this.lastNameTextBox.TabIndex = 1;
             this.lastNameTextBox.TextChanged += new System.EventHandler(this.lastNameTextBox_TextChanged);
             // 
             // birthDateTimePicker
             // 
-            this.birthDateTimePicker.Location = new System.Drawing.Point(297, 133);
+            this.birthDateTimePicker.Location = new System.Drawing.Point(128, 71);
             this.birthDateTimePicker.Name = "birthDateTimePicker";
-            this.birthDateTimePicker.Size = new System.Drawing.Size(200, 22);
+            this.birthDateTimePicker.Size = new System.Drawing.Size(220, 22);
             this.birthDateTimePicker.TabIndex = 2;
             this.birthDateTimePicker.ValueChanged += new System.EventHandler(this.birthDateTimePicker_ValueChanged);
             // 
             // phoneTextBox
             // 
-            this.phoneTextBox.Location = new System.Drawing.Point(297, 288);
+            this.phoneTextBox.Location = new System.Drawing.Point(128, 173);
             this.phoneTextBox.Name = "phoneTextBox";
-            this.phoneTextBox.Size = new System.Drawing.Size(200, 22);
+            this.phoneTextBox.Size = new System.Drawing.Size(220, 22);
             this.phoneTextBox.TabIndex = 3;
             this.phoneTextBox.TextChanged += new System.EventHandler(this.phoneTextBox_TextChanged);
             // 
             // emailTextBox
             // 
-            this.emailTextBox.Location = new System.Drawing.Point(297, 181);
+            this.emailTextBox.Location = new System.Drawing.Point(128, 107);
             this.emailTextBox.Name = "emailTextBox";
-            this.emailTextBox.Size = new System.Drawing.Size(200, 22);
+            this.emailTextBox.Size = new System.Drawing.Size(220, 22);
             this.emailTextBox.TabIndex = 4;
             this.emailTextBox.TextChanged += new System.EventHandler(this.emailTextBox_TextChanged);
             // 
             // VKTextBox
             // 
-            this.VKTextBox.Location = new System.Drawing.Point(297, 234);
+            this.VKTextBox.Location = new System.Drawing.Point(128, 142);
             this.VKTextBox.Name = "VKTextBox";
-            this.VKTextBox.Size = new System.Drawing.Size(200, 22);
+            this.VKTextBox.Size = new System.Drawing.Size(220, 22);
             this.VKTextBox.TabIndex = 5;
             this.VKTextBox.TextChanged += new System.EventHandler(this.VKTextBox_TextChanged);
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(47, 349);
+            this.saveButton.Location = new System.Drawing.Point(183, 249);
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(200, 34);
+            this.saveButton.Size = new System.Drawing.Size(191, 27);
             this.saveButton.TabIndex = 6;
             this.saveButton.Text = "Сохранить";
             this.saveButton.UseVisualStyleBackColor = true;
@@ -104,9 +133,9 @@
             // 
             // loadButton
             // 
-            this.loadButton.Location = new System.Drawing.Point(297, 349);
+            this.loadButton.Location = new System.Drawing.Point(395, 249);
             this.loadButton.Name = "loadButton";
-            this.loadButton.Size = new System.Drawing.Size(200, 34);
+            this.loadButton.Size = new System.Drawing.Size(185, 27);
             this.loadButton.TabIndex = 7;
             this.loadButton.Text = "Загрузить";
             this.loadButton.UseVisualStyleBackColor = true;
@@ -115,77 +144,278 @@
             // lastNameLabel
             // 
             this.lastNameLabel.AutoSize = true;
-            this.lastNameLabel.Location = new System.Drawing.Point(44, 38);
+            this.lastNameLabel.Location = new System.Drawing.Point(3, 0);
             this.lastNameLabel.Name = "lastNameLabel";
-            this.lastNameLabel.Size = new System.Drawing.Size(134, 16);
+            this.lastNameLabel.Size = new System.Drawing.Size(72, 16);
             this.lastNameLabel.TabIndex = 8;
-            this.lastNameLabel.Text = "Введите фамилию: ";
+            this.lastNameLabel.Text = "Фамилия: ";
             // 
             // firstNameLabel
             // 
             this.firstNameLabel.AutoSize = true;
-            this.firstNameLabel.Location = new System.Drawing.Point(44, 86);
+            this.firstNameLabel.Location = new System.Drawing.Point(3, 33);
             this.firstNameLabel.Name = "firstNameLabel";
-            this.firstNameLabel.Size = new System.Drawing.Size(96, 16);
+            this.firstNameLabel.Size = new System.Drawing.Size(39, 16);
             this.firstNameLabel.TabIndex = 9;
-            this.firstNameLabel.Text = "Введите имя: ";
+            this.firstNameLabel.Text = "Имя: ";
             // 
             // dateBirthLabel
             // 
             this.dateBirthLabel.AutoSize = true;
-            this.dateBirthLabel.Location = new System.Drawing.Point(44, 133);
+            this.dateBirthLabel.Location = new System.Drawing.Point(3, 68);
             this.dateBirthLabel.Name = "dateBirthLabel";
-            this.dateBirthLabel.Size = new System.Drawing.Size(170, 16);
+            this.dateBirthLabel.Size = new System.Drawing.Size(112, 16);
             this.dateBirthLabel.TabIndex = 10;
-            this.dateBirthLabel.Text = "Введите дату рождения: ";
+            this.dateBirthLabel.Text = "Дата рождения: ";
             // 
             // emailLabel
             // 
             this.emailLabel.AutoSize = true;
-            this.emailLabel.Location = new System.Drawing.Point(44, 181);
+            this.emailLabel.Location = new System.Drawing.Point(3, 104);
             this.emailLabel.Name = "emailLabel";
-            this.emailLabel.Size = new System.Drawing.Size(105, 16);
+            this.emailLabel.Size = new System.Drawing.Size(47, 16);
             this.emailLabel.TabIndex = 11;
-            this.emailLabel.Text = "Введите email: ";
+            this.emailLabel.Text = "Email: ";
             // 
             // VKIDLabel
             // 
             this.VKIDLabel.AutoSize = true;
-            this.VKIDLabel.Location = new System.Drawing.Point(44, 234);
+            this.VKIDLabel.Location = new System.Drawing.Point(3, 139);
             this.VKIDLabel.Name = "VKIDLabel";
-            this.VKIDLabel.Size = new System.Drawing.Size(105, 16);
+            this.VKIDLabel.Size = new System.Drawing.Size(46, 16);
             this.VKIDLabel.TabIndex = 12;
-            this.VKIDLabel.Text = "Введите VK ID: ";
+            this.VKIDLabel.Text = "VK ID: ";
             // 
             // phoneNumberLabel
             // 
             this.phoneNumberLabel.AutoSize = true;
-            this.phoneNumberLabel.Location = new System.Drawing.Point(44, 288);
+            this.phoneNumberLabel.Location = new System.Drawing.Point(3, 170);
             this.phoneNumberLabel.Name = "phoneNumberLabel";
-            this.phoneNumberLabel.Size = new System.Drawing.Size(182, 16);
+            this.phoneNumberLabel.Size = new System.Drawing.Size(79, 32);
             this.phoneNumberLabel.TabIndex = 13;
-            this.phoneNumberLabel.Text = "Введите номер телефона: ";
+            this.phoneNumberLabel.Text = "Номер телефона: ";
+            // 
+            // splitContainerMain
+            // 
+            this.splitContainerMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerMain.Location = new System.Drawing.Point(0, 28);
+            this.splitContainerMain.Name = "splitContainerMain";
+            // 
+            // splitContainerMain.Panel1
+            // 
+            this.splitContainerMain.Panel1.Controls.Add(this.vScrollBarContacts);
+            this.splitContainerMain.Panel1.Controls.Add(this.listBoxContacts);
+            this.splitContainerMain.Panel1.Controls.Add(this.textBoxFind);
+            this.splitContainerMain.Panel1.Controls.Add(this.labelFind);
+            // 
+            // splitContainerMain.Panel2
+            // 
+            this.splitContainerMain.Panel2.Controls.Add(this.tableLayoutPanel1);
+            this.splitContainerMain.Panel2.Controls.Add(this.loadButton);
+            this.splitContainerMain.Panel2.Controls.Add(this.saveButton);
+            this.splitContainerMain.Size = new System.Drawing.Size(1128, 566);
+            this.splitContainerMain.SplitterDistance = 373;
+            this.splitContainerMain.TabIndex = 14;
+            // 
+            // vScrollBarContacts
+            // 
+            this.vScrollBarContacts.Location = new System.Drawing.Point(333, 86);
+            this.vScrollBarContacts.Name = "vScrollBarContacts";
+            this.vScrollBarContacts.Size = new System.Drawing.Size(22, 437);
+            this.vScrollBarContacts.TabIndex = 3;
+            // 
+            // listBoxContacts
+            // 
+            this.listBoxContacts.FormattingEnabled = true;
+            this.listBoxContacts.ItemHeight = 16;
+            this.listBoxContacts.Location = new System.Drawing.Point(22, 86);
+            this.listBoxContacts.Name = "listBoxContacts";
+            this.listBoxContacts.Size = new System.Drawing.Size(333, 436);
+            this.listBoxContacts.TabIndex = 2;
+            // 
+            // textBoxFind
+            // 
+            this.textBoxFind.Location = new System.Drawing.Point(76, 36);
+            this.textBoxFind.Name = "textBoxFind";
+            this.textBoxFind.Size = new System.Drawing.Size(279, 22);
+            this.textBoxFind.TabIndex = 1;
+            // 
+            // labelFind
+            // 
+            this.labelFind.AutoSize = true;
+            this.labelFind.Location = new System.Drawing.Point(19, 37);
+            this.labelFind.Name = "labelFind";
+            this.labelFind.Size = new System.Drawing.Size(50, 16);
+            this.labelFind.TabIndex = 0;
+            this.labelFind.Text = "Поиск:";
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 31.65138F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 68.34863F));
+            this.tableLayoutPanel1.Controls.Add(this.lastNameLabel, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.firstNameLabel, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.phoneTextBox, 1, 5);
+            this.tableLayoutPanel1.Controls.Add(this.firstNameTextBox, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.birthDateTimePicker, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.emailTextBox, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.phoneNumberLabel, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.lastNameTextBox, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.dateBirthLabel, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.emailLabel, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.VKIDLabel, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.VKTextBox, 1, 4);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(183, 37);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 6;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 47.82609F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 52.17391F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 36F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 34F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(397, 205);
+            this.tableLayoutPanel1.TabIndex = 14;
+            // 
+            // menuStripMain
+            // 
+            this.menuStripMain.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menuStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.файлToolStripMenuItem,
+            this.редактироватьToolStripMenuItem,
+            this.помощьToolStripMenuItem});
+            this.menuStripMain.Location = new System.Drawing.Point(0, 0);
+            this.menuStripMain.Name = "menuStripMain";
+            this.menuStripMain.Size = new System.Drawing.Size(1128, 28);
+            this.menuStripMain.TabIndex = 15;
+            this.menuStripMain.Text = "menuStrip1";
+            // 
+            // файлToolStripMenuItem
+            // 
+            this.файлToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.выйтиToolStripMenuItem});
+            this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
+            this.файлToolStripMenuItem.Size = new System.Drawing.Size(59, 24);
+            this.файлToolStripMenuItem.Text = "Файл";
+            // 
+            // выйтиToolStripMenuItem
+            // 
+            this.выйтиToolStripMenuItem.Image = global::ContactsAppUI.Properties.Resources.vyhod;
+            this.выйтиToolStripMenuItem.Name = "выйтиToolStripMenuItem";
+            this.выйтиToolStripMenuItem.Size = new System.Drawing.Size(136, 26);
+            this.выйтиToolStripMenuItem.Text = "Выйти";
+            // 
+            // редактироватьToolStripMenuItem
+            // 
+            this.редактироватьToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.создатьКонтактToolStripMenuItem,
+            this.редактироватьКонтактToolStripMenuItem,
+            this.удалитьКонтактToolStripMenuItem});
+            this.редактироватьToolStripMenuItem.Name = "редактироватьToolStripMenuItem";
+            this.редактироватьToolStripMenuItem.Size = new System.Drawing.Size(77, 24);
+            this.редактироватьToolStripMenuItem.Text = "Контакт";
+            // 
+            // создатьКонтактToolStripMenuItem
+            // 
+            this.создатьКонтактToolStripMenuItem.Image = global::ContactsAppUI.Properties.Resources.plyus;
+            this.создатьКонтактToolStripMenuItem.Name = "создатьКонтактToolStripMenuItem";
+            this.создатьКонтактToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
+            this.создатьКонтактToolStripMenuItem.Text = "Создать";
+            // 
+            // редактироватьКонтактToolStripMenuItem
+            // 
+            this.редактироватьКонтактToolStripMenuItem.Image = global::ContactsAppUI.Properties.Resources.redaktirovat;
+            this.редактироватьКонтактToolStripMenuItem.Name = "редактироватьКонтактToolStripMenuItem";
+            this.редактироватьКонтактToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
+            this.редактироватьКонтактToolStripMenuItem.Text = "Редактировать";
+            // 
+            // удалитьКонтактToolStripMenuItem
+            // 
+            this.удалитьКонтактToolStripMenuItem.Image = global::ContactsAppUI.Properties.Resources.minus;
+            this.удалитьКонтактToolStripMenuItem.Name = "удалитьКонтактToolStripMenuItem";
+            this.удалитьКонтактToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
+            this.удалитьКонтактToolStripMenuItem.Text = "Удалить";
+            // 
+            // помощьToolStripMenuItem
+            // 
+            this.помощьToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.оПрограммеToolStripMenuItem});
+            this.помощьToolStripMenuItem.Name = "помощьToolStripMenuItem";
+            this.помощьToolStripMenuItem.Size = new System.Drawing.Size(83, 24);
+            this.помощьToolStripMenuItem.Text = "Помощь";
+            // 
+            // оПрограммеToolStripMenuItem
+            // 
+            this.оПрограммеToolStripMenuItem.Image = global::ContactsAppUI.Properties.Resources.info;
+            this.оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
+            this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(187, 26);
+            this.оПрограммеToolStripMenuItem.Text = "О программе";
+            // 
+            // toolStripMain
+            // 
+            this.toolStripMain.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.toolStripMain.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.toolStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButtonAdd,
+            this.toolStripButtonEdit,
+            this.toolStripButtonDelete});
+            this.toolStripMain.Location = new System.Drawing.Point(0, 567);
+            this.toolStripMain.Name = "toolStripMain";
+            this.toolStripMain.Size = new System.Drawing.Size(1128, 27);
+            this.toolStripMain.TabIndex = 16;
+            this.toolStripMain.Text = "toolStrip1";
+            // 
+            // toolStripButtonAdd
+            // 
+            this.toolStripButtonAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonAdd.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonAdd.Image")));
+            this.toolStripButtonAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonAdd.Name = "toolStripButtonAdd";
+            this.toolStripButtonAdd.Size = new System.Drawing.Size(29, 24);
+            this.toolStripButtonAdd.Text = "Добавить контакт";
+            // 
+            // toolStripButtonEdit
+            // 
+            this.toolStripButtonEdit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonEdit.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonEdit.Image")));
+            this.toolStripButtonEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonEdit.Name = "toolStripButtonEdit";
+            this.toolStripButtonEdit.Size = new System.Drawing.Size(29, 24);
+            this.toolStripButtonEdit.Text = "Редактировать контакт";
+            // 
+            // toolStripButtonDelete
+            // 
+            this.toolStripButtonDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonDelete.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonDelete.Image")));
+            this.toolStripButtonDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonDelete.Name = "toolStripButtonDelete";
+            this.toolStripButtonDelete.Size = new System.Drawing.Size(29, 24);
+            this.toolStripButtonDelete.Text = "Удалить контакт";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(603, 450);
-            this.Controls.Add(this.phoneNumberLabel);
-            this.Controls.Add(this.VKIDLabel);
-            this.Controls.Add(this.emailLabel);
-            this.Controls.Add(this.dateBirthLabel);
-            this.Controls.Add(this.firstNameLabel);
-            this.Controls.Add(this.lastNameLabel);
-            this.Controls.Add(this.loadButton);
-            this.Controls.Add(this.saveButton);
-            this.Controls.Add(this.VKTextBox);
-            this.Controls.Add(this.emailTextBox);
-            this.Controls.Add(this.phoneTextBox);
-            this.Controls.Add(this.birthDateTimePicker);
-            this.Controls.Add(this.lastNameTextBox);
-            this.Controls.Add(this.firstNameTextBox);
+            this.ClientSize = new System.Drawing.Size(1128, 594);
+            this.Controls.Add(this.toolStripMain);
+            this.Controls.Add(this.splitContainerMain);
+            this.Controls.Add(this.menuStripMain);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MainMenuStrip = this.menuStripMain;
             this.Name = "MainForm";
+            this.Text = "ContactsApp";
+            this.splitContainerMain.Panel1.ResumeLayout(false);
+            this.splitContainerMain.Panel1.PerformLayout();
+            this.splitContainerMain.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerMain)).EndInit();
+            this.splitContainerMain.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
+            this.menuStripMain.ResumeLayout(false);
+            this.menuStripMain.PerformLayout();
+            this.toolStripMain.ResumeLayout(false);
+            this.toolStripMain.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -207,6 +437,26 @@
         private System.Windows.Forms.Label emailLabel;
         private System.Windows.Forms.Label VKIDLabel;
         private System.Windows.Forms.Label phoneNumberLabel;
+        private System.Windows.Forms.SplitContainer splitContainerMain;
+        private System.Windows.Forms.VScrollBar vScrollBarContacts;
+        private System.Windows.Forms.ListBox listBoxContacts;
+        private System.Windows.Forms.TextBox textBoxFind;
+        private System.Windows.Forms.Label labelFind;
+        private System.Windows.Forms.MenuStrip menuStripMain;
+        private System.Windows.Forms.ToolStripMenuItem файлToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem выйтиToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem редактироватьToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem создатьКонтактToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem редактироватьКонтактToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem удалитьКонтактToolStripMenuItem;
+        private System.Windows.Forms.ToolStrip toolStripMain;
+        private System.Windows.Forms.ToolStripButton toolStripButtonAdd;
+        private System.Windows.Forms.ToolStripButton toolStripButtonEdit;
+        private System.Windows.Forms.ToolStripButton toolStripButtonDelete;
+        private System.Windows.Forms.ToolStripMenuItem помощьToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem оПрограммеToolStripMenuItem;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }
 

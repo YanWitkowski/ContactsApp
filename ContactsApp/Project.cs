@@ -12,22 +12,22 @@ namespace ContactsApp
     public class Project
     {
         /// <summary>
-        /// Хранит контакты в виде словаря со строковыми ключами и значениями типа Contact.
+        /// Хранит контакты в виде списка объектов типа Contact.
         /// </summary>
-        private Dictionary<string, Contact> _contacts;
+        private List<Contact> _contacts;
 
         /// <summary>
-        /// Возвращает или устанавливает словарь контактов.
+        /// Возвращает или устанавливает список контактов.
         /// </summary>
-        public Dictionary<string, Contact> Contacts { get => _contacts; set => _contacts = value; }
+        public List<Contact> Contacts { get => _contacts; set => _contacts = value; }
 
         /// <summary>
         /// Создает новый экземпляр класса Project.
         /// </summary>
-        /// <param name="contacts">Словарь контактов.</param>
-        public Project(Dictionary<string, Contact> contacts)
-            {
-                Contacts = contacts;
-            }
+        /// <param name="contacts">Список контактов.</param>
+        public Project(List<Contact> contacts)
+        {
+            Contacts = contacts;
+        }
     }
 }

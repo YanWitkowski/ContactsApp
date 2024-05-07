@@ -15,13 +15,14 @@ namespace ContactsAppUI
 {
     public partial class MainForm : Form
     {
-        private Contact _contact;
+        //private Contact _contact;
+        private List<Contact> contacts = new List<Contact>();
 
         public MainForm()
         {
                 InitializeComponent();
         }
-          
+
         private void lastNameTextBox_TextChanged(object sender, EventArgs e)
         {
 
@@ -29,7 +30,7 @@ namespace ContactsAppUI
         private void firstNameTextBox_TextChanged(object sender, EventArgs e)
         {
 
-        } 
+        }
         void birthDateTimePicker_ValueChanged(object sender, EventArgs e)
         {
 
@@ -43,8 +44,8 @@ namespace ContactsAppUI
         private void VKTextBox_TextChanged(object sender, EventArgs e)
         {
 
-        } 
-       
+        }
+
         private void phoneTextBox_TextChanged(object sender, EventArgs e)
         {
 
@@ -53,42 +54,47 @@ namespace ContactsAppUI
 
         private void saveButton_Click(object sender, EventArgs e)
         {
-            string lastName = lastNameTextBox.Text;
-            string firstName = firstNameTextBox.Text;
-            DateTime birthDate = birthDateTimePicker.Value;
-            string email = emailTextBox.Text;
-            string idVk = VKTextBox.Text;
-            PhoneNumber phoneNumber = new PhoneNumber(phoneTextBox.Text);
-            Contact contact = new Contact(lastName, firstName, birthDate, email, idVk, phoneNumber);
+            try
+            {
+                string lastName = lastNameTextBox.Text;
+                string firstName = firstNameTextBox.Text;
+                DateTime birthDate = birthDateTimePicker.Value;
+                string email = emailTextBox.Text;
+                string idVk = VKTextBox.Text;
+                PhoneNumber phoneNumber = new PhoneNumber(phoneTextBox.Text);
+                Contact contact = new Contact(lastName, firstName, birthDate, email, idVk, phoneNumber);
 
-            var contacts = new Dictionary<string, Contact>();
-            contacts.Add("0", contact);
+                contacts.Add(contact);
 
-            Project project = new Project(contacts);
+                Project project = new Project(contacts);
 
-            ProjectManager.SaveProject(project);
-            MessageBox.Show("Сохранено");
-
+                ProjectManager.SaveProject(project);
+                MessageBox.Show("Сохранено");
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
         }
 
         private void loadButton_Click(object sender, EventArgs e)
         {
             Project project = ProjectManager.LoadProject();
 
-            if (project.Contacts.ContainsKey("0"))
+            if (project.Contacts.Count > 0)
             {
-                var contact = project.Contacts["0"];
+                var contact = project.Contacts[0];
 
-            firstNameTextBox.Text = contact.FirstName;
-            lastNameTextBox.Text = contact.LastName;
-            emailTextBox.Text = contact.Email;
-            VKTextBox.Text = contact.ID_VK;
-            birthDateTimePicker.Value = contact.BirthDate;
-            phoneTextBox.Text = contact.PhoneNumber.Phone;
+                firstNameTextBox.Text = contact.FirstName;
+                lastNameTextBox.Text = contact.LastName;
+                emailTextBox.Text = contact.Email;
+                VKTextBox.Text = contact.ID_VK;
+                birthDateTimePicker.Value = contact.BirthDate;
+                phoneTextBox.Text = contact.PhoneNumber.Phone;
             }
             else
             {
-                MessageBox.Show("Контакт с ключом \"0\" не найден.", "Ошибка");
+                MessageBox.Show("Контакты не найдены.", "Ошибка");
             }
         }
     }

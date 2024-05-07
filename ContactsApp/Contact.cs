@@ -13,11 +13,11 @@ namespace ContactsApp
     /// </summary>
     public class Contact : ICloneable
     {
-        string _lastName;
-        string _firstName;
-        DateTime _birthDate;
-        string _email;
-        string _idVk;
+        private string _lastName;
+        private string _firstName;
+        private DateTime _birthDate;
+        private string _email;
+        private string _idVk;
         PhoneNumber _phoneNumber;
 
         /// <summary>
