@@ -29,13 +29,31 @@ namespace ContactsAppUI
             get => _contactsProject;
             set => _contactsProject = value;
         }
-        // private List<Contact> contacts = new List<Contact>();
 
         public MainForm()
         {
             InitializeComponent();
-            ContactsProject = ProjectManager.LoadProject();
-            RecreateContactList();
+            bool projectLoaded = false;
+
+            do
+            {
+                ContactsProject = ProjectManager.LoadProject();
+
+                if (ContactsProject == null)
+                {
+                    var result = MessageBox.Show("Проект не был корректно загружен. Хотите попробовать загрузить его снова?", "Ошибка загрузки проекта", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+
+                    if (result == DialogResult.No)
+                    {
+                        projectLoaded = true; // Прекращаем пытаться загрузить проект
+                    }
+                }
+                else
+                {
+                    projectLoaded = true; // Проект успешно загружен, выходим из цикла
+                    RecreateContactList();
+                }
+            } while (!projectLoaded);
         }
 
         /// <summary>
@@ -44,17 +62,16 @@ namespace ContactsAppUI
         /// <param name="defaultSelectedIndex">номер контакта, который будет выделен после пересоздания</param>
         void RecreateContactList(int defaultSelectedIndex = 0)
         {
-            var contactNames = ContactsProject.Contacts.ToArray();
+            ContactsListBox.Items.Clear(); // Очистка списка перед добавлением новых элементов
 
-            for (int i = 0; i < contactNames.Length; i++)
+            foreach (var contact in ContactsProject.Contacts)
             {
-                ContactsListBox.Items.Add(contactNames[i].FirstName + " " + contactNames[i].LastName);
+                ContactsListBox.Items.Add(contact.FirstName + " " + contact.LastName);
             }
-
-            int selectedIndex = defaultSelectedIndex < 0 || defaultSelectedIndex >= contactNames.Length ? 0 : defaultSelectedIndex;
 
             if (ContactsListBox.Items.Count > 0)
             {
+                int selectedIndex = defaultSelectedIndex < 0 || defaultSelectedIndex >= ContactsListBox.Items.Count ? 0 : defaultSelectedIndex;
                 ContactsListBox.SelectedIndex = selectedIndex;
             }
             else

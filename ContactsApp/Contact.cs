@@ -213,20 +213,26 @@ namespace ContactsApp
             get => _idVk; 
             set
             {
-                // Проверка на пустое значение
-                if (string.IsNullOrWhiteSpace(value))
+                try
                 {
-                    throw new ArgumentException("ID-Вконтакте не может быть пустым");
-                }
-
-                if (value != null)
-                {
-                    CheckMaxLength(value, 15, "ID-Вконтакте не должен превышать 15 символов");
-                    if (ContainsCyrillic(value))
+                    // Проверка на пустое значение
+                    if (string.IsNullOrWhiteSpace(value))
                     {
-                        throw new ArgumentException("ID-Вконтакте не может содержать кириллические символы");
+                        throw new ArgumentException("ID-Вконтакте не может быть пустым");
                     }
                 }
+                catch (ArgumentException ex)
+                {
+                    Console.WriteLine($"Произошла ошибка: {ex.Message}");
+                }
+                    if (value != null)
+                    {
+                        CheckMaxLength(value, 15, "ID-Вконтакте не должен превышать 15 символов");
+                        if (ContainsCyrillic(value))
+                        {
+                            throw new ArgumentException("ID-Вконтакте не может содержать кириллические символы");
+                        }
+                    }
 
                 _idVk = value;
             }

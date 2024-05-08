@@ -183,8 +183,8 @@
             // splitContainerMain.Panel2
             // 
             this.splitContainerMain.Panel2.Controls.Add(this.tableLayoutPanel1);
-            this.splitContainerMain.Size = new System.Drawing.Size(1130, 573);
-            this.splitContainerMain.SplitterDistance = 374;
+            this.splitContainerMain.Size = new System.Drawing.Size(1116, 588);
+            this.splitContainerMain.SplitterDistance = 369;
             this.splitContainerMain.TabIndex = 14;
             // 
             // vScrollBarContacts
@@ -258,7 +258,7 @@
             this.помощьToolStripMenuItem});
             this.menuStripMain.Location = new System.Drawing.Point(0, 0);
             this.menuStripMain.Name = "menuStripMain";
-            this.menuStripMain.Size = new System.Drawing.Size(1130, 28);
+            this.menuStripMain.Size = new System.Drawing.Size(1116, 28);
             this.menuStripMain.TabIndex = 15;
             this.menuStripMain.Text = "menuStrip1";
             // 
@@ -336,9 +336,9 @@
             this.toolStripButtonAdd,
             this.toolStripButtonEdit,
             this.toolStripButtonDelete});
-            this.toolStripMain.Location = new System.Drawing.Point(0, 574);
+            this.toolStripMain.Location = new System.Drawing.Point(0, 589);
             this.toolStripMain.Name = "toolStripMain";
-            this.toolStripMain.Size = new System.Drawing.Size(1130, 27);
+            this.toolStripMain.Size = new System.Drawing.Size(1116, 27);
             this.toolStripMain.TabIndex = 16;
             this.toolStripMain.Text = "toolStrip1";
             // 
@@ -373,7 +373,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1130, 601);
+            this.ClientSize = new System.Drawing.Size(1116, 616);
             this.Controls.Add(this.toolStripMain);
             this.Controls.Add(this.splitContainerMain);
             this.Controls.Add(this.menuStripMain);
