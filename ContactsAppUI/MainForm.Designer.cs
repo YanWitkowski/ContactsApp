@@ -47,6 +47,8 @@
             this.ContactsListBox = new System.Windows.Forms.ListBox();
             this.textBoxFind = new System.Windows.Forms.TextBox();
             this.labelFind = new System.Windows.Forms.Label();
+            this.birthdayPanel = new System.Windows.Forms.Panel();
+            this.birthdayListLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.menuStripMain = new System.Windows.Forms.MenuStrip();
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -62,10 +64,12 @@
             this.toolStripButtonEdit = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonDelete = new System.Windows.Forms.ToolStripButton();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerMain)).BeginInit();
             this.splitContainerMain.Panel1.SuspendLayout();
             this.splitContainerMain.Panel2.SuspendLayout();
             this.splitContainerMain.SuspendLayout();
+            this.birthdayPanel.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.menuStripMain.SuspendLayout();
             this.toolStripMain.SuspendLayout();
@@ -182,6 +186,7 @@
             // 
             // splitContainerMain.Panel2
             // 
+            this.splitContainerMain.Panel2.Controls.Add(this.birthdayPanel);
             this.splitContainerMain.Panel2.Controls.Add(this.tableLayoutPanel1);
             this.splitContainerMain.Size = new System.Drawing.Size(1116, 588);
             this.splitContainerMain.SplitterDistance = 369;
@@ -219,6 +224,23 @@
             this.labelFind.Size = new System.Drawing.Size(50, 16);
             this.labelFind.TabIndex = 0;
             this.labelFind.Text = "Поиск:";
+            // 
+            // birthdayPanel
+            // 
+            this.birthdayPanel.Controls.Add(this.birthdayListLabel);
+            this.birthdayPanel.Location = new System.Drawing.Point(3, 434);
+            this.birthdayPanel.Name = "birthdayPanel";
+            this.birthdayPanel.Size = new System.Drawing.Size(737, 124);
+            this.birthdayPanel.TabIndex = 15;
+            // 
+            // birthdayListLabel
+            // 
+            this.birthdayListLabel.AutoSize = true;
+            this.birthdayListLabel.Location = new System.Drawing.Point(34, 47);
+            this.birthdayListLabel.Name = "birthdayListLabel";
+            this.birthdayListLabel.Size = new System.Drawing.Size(109, 16);
+            this.birthdayListLabel.TabIndex = 1;
+            this.birthdayListLabel.Text = "birthdayListLabel";
             // 
             // tableLayoutPanel1
             // 
@@ -274,7 +296,7 @@
             // 
             this.выйтиToolStripMenuItem.Image = global::ContactsAppUI.Properties.Resources.vyhod;
             this.выйтиToolStripMenuItem.Name = "выйтиToolStripMenuItem";
-            this.выйтиToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.выйтиToolStripMenuItem.Size = new System.Drawing.Size(136, 26);
             this.выйтиToolStripMenuItem.Text = "Выйти";
             this.выйтиToolStripMenuItem.Click += new System.EventHandler(this.выйтиToolStripMenuItem_Click);
             // 
@@ -292,7 +314,7 @@
             // 
             this.создатьКонтактToolStripMenuItem.Image = global::ContactsAppUI.Properties.Resources.plyus;
             this.создатьКонтактToolStripMenuItem.Name = "создатьКонтактToolStripMenuItem";
-            this.создатьКонтактToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.создатьКонтактToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
             this.создатьКонтактToolStripMenuItem.Text = "Создать";
             this.создатьКонтактToolStripMenuItem.Click += new System.EventHandler(this.создатьКонтактToolStripMenuItem_Click);
             // 
@@ -300,7 +322,7 @@
             // 
             this.редактироватьКонтактToolStripMenuItem.Image = global::ContactsAppUI.Properties.Resources.redaktirovat;
             this.редактироватьКонтактToolStripMenuItem.Name = "редактироватьКонтактToolStripMenuItem";
-            this.редактироватьКонтактToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.редактироватьКонтактToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
             this.редактироватьКонтактToolStripMenuItem.Text = "Редактировать";
             this.редактироватьКонтактToolStripMenuItem.Click += new System.EventHandler(this.редактироватьКонтактToolStripMenuItem_Click);
             // 
@@ -308,7 +330,7 @@
             // 
             this.удалитьКонтактToolStripMenuItem.Image = global::ContactsAppUI.Properties.Resources.minus;
             this.удалитьКонтактToolStripMenuItem.Name = "удалитьКонтактToolStripMenuItem";
-            this.удалитьКонтактToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.удалитьКонтактToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
             this.удалитьКонтактToolStripMenuItem.Text = "Удалить";
             this.удалитьКонтактToolStripMenuItem.Click += new System.EventHandler(this.удалитьКонтактToolStripMenuItem_Click);
             // 
@@ -324,7 +346,7 @@
             // 
             this.оПрограммеToolStripMenuItem.Image = global::ContactsAppUI.Properties.Resources.info;
             this.оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
-            this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(187, 26);
             this.оПрограммеToolStripMenuItem.Text = "О программе";
             this.оПрограммеToolStripMenuItem.Click += new System.EventHandler(this.оПрограммеToolStripMenuItem_Click);
             // 
@@ -350,6 +372,7 @@
             this.toolStripButtonAdd.Name = "toolStripButtonAdd";
             this.toolStripButtonAdd.Size = new System.Drawing.Size(29, 24);
             this.toolStripButtonAdd.Text = "Добавить контакт";
+            this.toolStripButtonAdd.Click += new System.EventHandler(this.toolStripButtonAdd_Click);
             // 
             // toolStripButtonEdit
             // 
@@ -359,6 +382,7 @@
             this.toolStripButtonEdit.Name = "toolStripButtonEdit";
             this.toolStripButtonEdit.Size = new System.Drawing.Size(29, 24);
             this.toolStripButtonEdit.Text = "Редактировать контакт";
+            this.toolStripButtonEdit.Click += new System.EventHandler(this.toolStripButtonEdit_Click);
             // 
             // toolStripButtonDelete
             // 
@@ -368,6 +392,11 @@
             this.toolStripButtonDelete.Name = "toolStripButtonDelete";
             this.toolStripButtonDelete.Size = new System.Drawing.Size(29, 24);
             this.toolStripButtonDelete.Text = "Удалить контакт";
+            this.toolStripButtonDelete.Click += new System.EventHandler(this.toolStripButtonDelete_Click);
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // MainForm
             // 
@@ -387,6 +416,8 @@
             this.splitContainerMain.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerMain)).EndInit();
             this.splitContainerMain.ResumeLayout(false);
+            this.birthdayPanel.ResumeLayout(false);
+            this.birthdayPanel.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.menuStripMain.ResumeLayout(false);
@@ -432,6 +463,9 @@
         private System.Windows.Forms.ToolStripMenuItem оПрограммеToolStripMenuItem;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Panel birthdayPanel;
+        private System.Windows.Forms.Label birthdayListLabel;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

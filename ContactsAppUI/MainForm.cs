@@ -30,9 +30,13 @@ namespace ContactsAppUI
             set => _contactsProject = value;
         }
 
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="MainForm"/>.
+        /// </summary>
         public MainForm()
         {
             InitializeComponent();
+           
             bool projectLoaded = false;
 
             do
@@ -54,6 +58,67 @@ namespace ContactsAppUI
                     RecreateContactList();
                 }
             } while (!projectLoaded);
+
+            List<Contact> contactsWithBirthday = ContactsProject.GetContactsWithBirthday(DateTime.Now);
+            if (contactsWithBirthday.Count == 0)
+            {
+                birthdayListLabel.Text = "Сегодня нет контактов с днем рождения";
+            }
+            else
+            {
+                birthdayListLabel.Text = "Сегодня день рождения у\n";
+                for (int index = 0; index < contactsWithBirthday.Count; ++index)
+                {
+                    birthdayListLabel.Text += contactsWithBirthday[index].ToString();
+                    if (index < contactsWithBirthday.Count - 1)
+                        birthdayListLabel.Text += ", ";
+                }
+            }
+        }
+
+        /// <summary>
+        /// Добавляет новый контакт.
+        /// </summary>
+        private void AddNewContact()
+        {
+            AddEditForm addEditContactForm = new AddEditForm();
+            var dialogResult = addEditContactForm.ShowDialog();
+            if (dialogResult == DialogResult.OK)
+            {
+                Contact contact = addEditContactForm.CurrentContact;
+                ContactsProject.Contacts.Add(contact);
+                RecreateContactList(ContactsProject.Contacts.ToArray().Length - 1);
+                ProjectManager.SaveProject(ContactsProject);
+            }
+        }
+
+        /// <summary>
+        /// Редактирует выбранный контакт.
+        /// </summary>
+        private void EditContact()
+        {
+            AddEditForm addEditContactForm = new AddEditForm();
+            Contact contact = ContactsProject.Contacts[ContactsListBox.SelectedIndex];
+            addEditContactForm.CurrentContact = contact;
+            var dialogResult = addEditContactForm.ShowDialog();
+            if (dialogResult == DialogResult.OK)
+            {
+                RecreateContactList(ContactsListBox.SelectedIndex);
+            }
+        }
+
+        /// <summary>
+        /// Удаляет выбранный контакт.
+        /// </summary>
+        private void DeleteContact()
+        {
+            if (ContactsListBox.SelectedIndex >= 0)
+            {
+                var contactToRemove = ContactsProject.Contacts[ContactsListBox.SelectedIndex];
+                ContactsProject.Contacts.Remove(contactToRemove);
+                RecreateContactList();
+                ProjectManager.SaveProject(ContactsProject);
+            }
         }
 
         /// <summary>
@@ -87,15 +152,17 @@ namespace ContactsAppUI
         /// <param name="e"></param>
         private void создатьКонтактToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AddEditForm addEditContactForm = new AddEditForm();
-            var dialogResult = addEditContactForm.ShowDialog();
-            if (dialogResult == DialogResult.OK)
-            {
-                Contact contact = addEditContactForm.CurrentContact;
-                ContactsProject.Contacts.Add(contact);
-                RecreateContactList(ContactsProject.Contacts.ToArray().Length - 1);
-                ProjectManager.SaveProject(ContactsProject);
-            }
+            AddNewContact();
+        }
+
+        /// <summary>
+        /// Обработка события нажатия кнопки "Добавить контакт".
+        /// </summary>
+        /// <param name="sender">Источник события.</param>
+        /// <param name="e">Данные о событии.</param>
+        private void toolStripButtonAdd_Click(object sender, EventArgs e)
+        {
+            AddNewContact();
         }
 
         /// <summary>
@@ -105,14 +172,17 @@ namespace ContactsAppUI
         /// <param name="e"></param>
         private void редактироватьКонтактToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AddEditForm addEditContactForm = new AddEditForm();
-            Contact contact = ContactsProject.Contacts[ContactsListBox.SelectedIndex];
-            addEditContactForm.CurrentContact = contact;
-            var dialogResult = addEditContactForm.ShowDialog();
-            if (dialogResult == DialogResult.OK)
-            {
-                RecreateContactList(ContactsListBox.SelectedIndex);
-            }
+            EditContact();
+        }
+
+        /// <summary>
+        /// Обработка события нажатия кнопки "Редактировать контакт" на панели инструментов.
+        /// </summary>
+        /// <param name="sender">Источник события.</param>
+        /// <param name="e">Данные о событии.</param>
+        private void toolStripButtonEdit_Click(object sender, EventArgs e)
+        {
+            EditContact();
         }
 
         /// <summary>
@@ -122,13 +192,17 @@ namespace ContactsAppUI
         /// <param name="e"></param>
         private void удалитьКонтактToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (ContactsListBox.SelectedIndex >= 0)
-            {
-                var contactToRemove = ContactsProject.Contacts[ContactsListBox.SelectedIndex];
-                ContactsProject.Contacts.Remove(contactToRemove);
-                RecreateContactList();
-                ProjectManager.SaveProject(ContactsProject);
-            }
+            DeleteContact();
+        }
+
+        /// <summary>
+        /// Обработка события нажатия кнопки "Удалить контакт" на панели инструментов.
+        /// </summary>
+        /// <param name="sender">Источник события.</param>
+        /// <param name="e">Данные о событии.</param>
+        private void toolStripButtonDelete_Click(object sender, EventArgs e)
+        {
+            DeleteContact();
         }
 
         /// <summary>
@@ -169,9 +243,25 @@ namespace ContactsAppUI
             ProjectManager.SaveProject(ContactsProject);
         }
 
+        /// <summary>
+        /// Обработка события нажатия кнопки "Выйти".
+        /// </summary>
+        /// <param name="sender">Источник события.</param>
+        /// <param name="e">Данные о событии.</param>
         private void выйтиToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        /// <summary>
+        /// Обработка события срабатывания таймера для скрытия панели с напоминанием о днях рождения.
+        /// </summary>
+        /// <param name="sender">Источник события.</param>
+        /// <param name="e">Данные о событии.</param>
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            birthdayPanel.Visible = false;
+            timer1.Stop();
         }
     }
 }

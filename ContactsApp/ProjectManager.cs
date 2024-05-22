@@ -24,11 +24,19 @@ namespace ContactsApp
         /// /// <param name="project"></param>
         public static void SaveProject(Project project)
         {
-            JsonSerializer serializer = new JsonSerializer();
-            using (StreamWriter sw = new StreamWriter(FilePath))
-            using (JsonWriter writer = new JsonTextWriter(sw))
+            try
             {
-                serializer.Serialize(writer, project);
+                JsonSerializer serializer = new JsonSerializer();
+                using (StreamWriter sw = new StreamWriter(FilePath))
+                using (JsonWriter writer = new JsonTextWriter(sw))
+                {
+                    serializer.Serialize(writer, project);
+                }
+                Console.WriteLine("Проект успешно сохранен.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Ошибка при сохранении проекта: {ex.Message}");
             }
         }
 
@@ -36,6 +44,7 @@ namespace ContactsApp
         /// Метод для загрузки объекта «Проект» из файла.
         /// </summary>
         /// <returns>Эксземпляр класса Project из файла</returns>
+        /// 
         public static Project LoadProject()
         {
             Project project = null;
@@ -45,21 +54,14 @@ namespace ContactsApp
                 using (StreamReader sr = new StreamReader(FilePath))
                 using (JsonReader reader = new JsonTextReader(sr))
                 {
-                    project = serializer.Deserialize<Project>(reader);  // Инициализация объекта Project
-                    // Инициализация дочерних объектов (если необходимо)
-                    foreach (Contact contact in project.Contacts)
-                    {
-                        contact.PhoneNumber = new PhoneNumber(contact.PhoneNumber.Phone);
-                    }
-
-                    //    project = (Project)serializer.Deserialize<Project>(reader);
+                    project = serializer.Deserialize<Project>(reader);
                 }
+                Console.WriteLine("Проект успешно загружен.");
             }
-            catch (FileNotFoundException)
+            catch
             {
                 Console.WriteLine("Файл проекта не найден.");
             }
-
             return project;
         }
     }

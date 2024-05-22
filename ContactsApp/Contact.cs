@@ -261,5 +261,14 @@ namespace ContactsApp
         {
                 return new Contact(LastName, FirstName, BirthDate, Email, ID_VK, PhoneNumber);
         }
+
+        /// <summary>
+        /// Возвращает строку, представляющую текущий объект.
+        /// </summary>
+        /// <returns>Строка с именем контакта.</returns>
+        public override string ToString()
+        {
+            return $"{FirstName} {LastName}";
+        }
     }
 }
