@@ -45,9 +45,10 @@
             this.splitContainerMain = new System.Windows.Forms.SplitContainer();
             this.vScrollBarContacts = new System.Windows.Forms.VScrollBar();
             this.ContactsListBox = new System.Windows.Forms.ListBox();
-            this.textBoxFind = new System.Windows.Forms.TextBox();
+            this.SearchTextBox = new System.Windows.Forms.TextBox();
             this.labelFind = new System.Windows.Forms.Label();
             this.birthdayPanel = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.birthdayListLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.menuStripMain = new System.Windows.Forms.MenuStrip();
@@ -70,6 +71,7 @@
             this.splitContainerMain.Panel2.SuspendLayout();
             this.splitContainerMain.SuspendLayout();
             this.birthdayPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.menuStripMain.SuspendLayout();
             this.toolStripMain.SuspendLayout();
@@ -181,7 +183,7 @@
             // 
             this.splitContainerMain.Panel1.Controls.Add(this.vScrollBarContacts);
             this.splitContainerMain.Panel1.Controls.Add(this.ContactsListBox);
-            this.splitContainerMain.Panel1.Controls.Add(this.textBoxFind);
+            this.splitContainerMain.Panel1.Controls.Add(this.SearchTextBox);
             this.splitContainerMain.Panel1.Controls.Add(this.labelFind);
             // 
             // splitContainerMain.Panel2
@@ -209,12 +211,13 @@
             this.ContactsListBox.TabIndex = 2;
             this.ContactsListBox.SelectedIndexChanged += new System.EventHandler(this.ContactsListBox_SelectedIndexChanged);
             // 
-            // textBoxFind
+            // SearchTextBox
             // 
-            this.textBoxFind.Location = new System.Drawing.Point(76, 36);
-            this.textBoxFind.Name = "textBoxFind";
-            this.textBoxFind.Size = new System.Drawing.Size(279, 22);
-            this.textBoxFind.TabIndex = 1;
+            this.SearchTextBox.Location = new System.Drawing.Point(76, 36);
+            this.SearchTextBox.Name = "SearchTextBox";
+            this.SearchTextBox.Size = new System.Drawing.Size(279, 22);
+            this.SearchTextBox.TabIndex = 1;
+            this.SearchTextBox.TextChanged += new System.EventHandler(this.SearchTextBox_TextChanged);
             // 
             // labelFind
             // 
@@ -227,16 +230,30 @@
             // 
             // birthdayPanel
             // 
+            this.birthdayPanel.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.birthdayPanel.Controls.Add(this.pictureBox1);
             this.birthdayPanel.Controls.Add(this.birthdayListLabel);
             this.birthdayPanel.Location = new System.Drawing.Point(3, 434);
             this.birthdayPanel.Name = "birthdayPanel";
             this.birthdayPanel.Size = new System.Drawing.Size(737, 124);
             this.birthdayPanel.TabIndex = 15;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox1.Image = global::ContactsAppUI.Properties.Resources.free_icon_cake_4894164;
+            this.pictureBox1.Location = new System.Drawing.Point(32, 24);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(95, 82);
+            this.pictureBox1.TabIndex = 2;
+            this.pictureBox1.TabStop = false;
+            // 
             // birthdayListLabel
             // 
             this.birthdayListLabel.AutoSize = true;
-            this.birthdayListLabel.Location = new System.Drawing.Point(34, 47);
+            this.birthdayListLabel.Location = new System.Drawing.Point(133, 38);
             this.birthdayListLabel.Name = "birthdayListLabel";
             this.birthdayListLabel.Size = new System.Drawing.Size(109, 16);
             this.birthdayListLabel.TabIndex = 1;
@@ -296,7 +313,7 @@
             // 
             this.выйтиToolStripMenuItem.Image = global::ContactsAppUI.Properties.Resources.vyhod;
             this.выйтиToolStripMenuItem.Name = "выйтиToolStripMenuItem";
-            this.выйтиToolStripMenuItem.Size = new System.Drawing.Size(136, 26);
+            this.выйтиToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.выйтиToolStripMenuItem.Text = "Выйти";
             this.выйтиToolStripMenuItem.Click += new System.EventHandler(this.выйтиToolStripMenuItem_Click);
             // 
@@ -314,7 +331,7 @@
             // 
             this.создатьКонтактToolStripMenuItem.Image = global::ContactsAppUI.Properties.Resources.plyus;
             this.создатьКонтактToolStripMenuItem.Name = "создатьКонтактToolStripMenuItem";
-            this.создатьКонтактToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
+            this.создатьКонтактToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.создатьКонтактToolStripMenuItem.Text = "Создать";
             this.создатьКонтактToolStripMenuItem.Click += new System.EventHandler(this.создатьКонтактToolStripMenuItem_Click);
             // 
@@ -322,7 +339,7 @@
             // 
             this.редактироватьКонтактToolStripMenuItem.Image = global::ContactsAppUI.Properties.Resources.redaktirovat;
             this.редактироватьКонтактToolStripMenuItem.Name = "редактироватьКонтактToolStripMenuItem";
-            this.редактироватьКонтактToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
+            this.редактироватьКонтактToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.редактироватьКонтактToolStripMenuItem.Text = "Редактировать";
             this.редактироватьКонтактToolStripMenuItem.Click += new System.EventHandler(this.редактироватьКонтактToolStripMenuItem_Click);
             // 
@@ -330,7 +347,8 @@
             // 
             this.удалитьКонтактToolStripMenuItem.Image = global::ContactsAppUI.Properties.Resources.minus;
             this.удалитьКонтактToolStripMenuItem.Name = "удалитьКонтактToolStripMenuItem";
-            this.удалитьКонтактToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
+            this.удалитьКонтактToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Delete;
+            this.удалитьКонтактToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.удалитьКонтактToolStripMenuItem.Text = "Удалить";
             this.удалитьКонтактToolStripMenuItem.Click += new System.EventHandler(this.удалитьКонтактToolStripMenuItem_Click);
             // 
@@ -418,6 +436,7 @@
             this.splitContainerMain.ResumeLayout(false);
             this.birthdayPanel.ResumeLayout(false);
             this.birthdayPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.menuStripMain.ResumeLayout(false);
@@ -446,7 +465,7 @@
         private System.Windows.Forms.SplitContainer splitContainerMain;
         private System.Windows.Forms.VScrollBar vScrollBarContacts;
         private System.Windows.Forms.ListBox ContactsListBox;
-        private System.Windows.Forms.TextBox textBoxFind;
+        private System.Windows.Forms.TextBox SearchTextBox;
         private System.Windows.Forms.Label labelFind;
         private System.Windows.Forms.MenuStrip menuStripMain;
         private System.Windows.Forms.ToolStripMenuItem файлToolStripMenuItem;
@@ -466,6 +485,7 @@
         private System.Windows.Forms.Panel birthdayPanel;
         private System.Windows.Forms.Label birthdayListLabel;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

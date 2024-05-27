@@ -66,7 +66,7 @@ namespace ContactsAppUI
             }
             else
             {
-                birthdayListLabel.Text = "Сегодня день рождения у\n";
+                birthdayListLabel.Text = "Сегодня день рождения: \n";
                 for (int index = 0; index < contactsWithBirthday.Count; ++index)
                 {
                     birthdayListLabel.Text += contactsWithBirthday[index].ToString();
@@ -74,7 +74,42 @@ namespace ContactsAppUI
                         birthdayListLabel.Text += ", ";
                 }
             }
+            CreateContactList();
         }
+
+        private void CreateContactList(bool selectSomething = true, int selectedIndex = 0)
+        {
+            string searchText = SearchTextBox.Text.ToLower();
+            List<Contact> filteredContacts;
+
+            if (string.IsNullOrWhiteSpace(searchText))
+            {
+                filteredContacts = ContactsProject.GetSortedContacts().ToList();
+            }
+            else
+            {
+                filteredContacts = ContactsProject.Contacts
+                    .Where(contact => contact.FirstName.ToLower().Contains(searchText) ||
+                                      contact.LastName.ToLower().Contains(searchText))
+                    .OrderBy(contact => contact.LastName)
+                    .ThenBy(contact => contact.FirstName)
+                    .ToList();
+            }
+
+            ContactsListBox.Items.Clear();
+
+            foreach (var contact in filteredContacts)
+            {
+                ContactsListBox.Items.Add(contact);
+            }
+
+            if (selectSomething && ContactsListBox.Items.Count > 0)
+            {
+                selectedIndex = selectedIndex < 0 || selectedIndex >= ContactsListBox.Items.Count ? 0 : selectedIndex;
+                ContactsListBox.SelectedIndex = selectedIndex;
+            }
+        }
+
 
         /// <summary>
         /// Добавляет новый контакт.
@@ -115,9 +150,20 @@ namespace ContactsAppUI
             if (ContactsListBox.SelectedIndex >= 0)
             {
                 var contactToRemove = ContactsProject.Contacts[ContactsListBox.SelectedIndex];
-                ContactsProject.Contacts.Remove(contactToRemove);
-                RecreateContactList();
-                ProjectManager.SaveProject(ContactsProject);
+
+                // Добавление всплывающего окна с запросом подтверждения
+                var confirmResult = MessageBox.Show(
+                    $"Вы уверены, что хотите удалить контакт {contactToRemove.LastName}?",
+                    "Подтверждение удаления",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+
+                if (confirmResult == DialogResult.Yes)
+                {
+                    ContactsProject.Contacts.Remove(contactToRemove);
+                    RecreateContactList();
+                    ProjectManager.SaveProject(ContactsProject);
+                }
             }
         }
 
@@ -127,9 +173,26 @@ namespace ContactsAppUI
         /// <param name="defaultSelectedIndex">номер контакта, который будет выделен после пересоздания</param>
         void RecreateContactList(int defaultSelectedIndex = 0)
         {
-            ContactsListBox.Items.Clear(); // Очистка списка перед добавлением новых элементов
+            string searchText = SearchTextBox.Text.ToLower();
+            List<Contact> filteredContacts;
 
-            foreach (var contact in ContactsProject.Contacts)
+            if (string.IsNullOrWhiteSpace(searchText))
+            {
+                filteredContacts = ContactsProject.GetSortedContacts().ToList();
+            }
+            else
+            {
+                filteredContacts = ContactsProject.Contacts
+                    .Where(contact => contact.FirstName.ToLower().Contains(searchText) ||
+                                      contact.LastName.ToLower().Contains(searchText))
+                    .OrderBy(contact => contact.LastName)
+                    .ThenBy(contact => contact.FirstName)
+                    .ToList();
+            }
+
+            ContactsListBox.Items.Clear();
+
+            foreach (var contact in filteredContacts)
             {
                 ContactsListBox.Items.Add(contact.FirstName + " " + contact.LastName);
             }
@@ -142,7 +205,18 @@ namespace ContactsAppUI
             else
             {
                 ContactsListBox.SelectedIndex = -1;
+                ClearContactDetails();
             }
+        }
+
+        private void ClearContactDetails()
+        {
+            lastNameTextBox.Text = string.Empty;
+            firstNameTextBox.Text = string.Empty;
+            birthDateTimePicker.Value = DateTime.Today;
+            emailTextBox.Text = string.Empty;
+            VKTextBox.Text = string.Empty;
+            phoneTextBox.Text = string.Empty;
         }
 
         /// <summary>
@@ -223,14 +297,18 @@ namespace ContactsAppUI
         /// <param name="e"></param>
         private void ContactsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var contact = ContactsProject.Contacts[ContactsListBox.SelectedIndex];
+            if (ContactsListBox.SelectedIndex != -1)
+            {
+                var displayedContacts = ContactsProject.GetSortedContacts();
+                var selectedContact = displayedContacts[ContactsListBox.SelectedIndex];
 
-            lastNameTextBox.Text = contact.LastName;
-            firstNameTextBox.Text = contact.FirstName;
-            birthDateTimePicker.Text = contact.BirthDate.ToString("d");
-            emailTextBox.Text = contact.Email;
-            VKTextBox.Text = contact.ID_VK;
-            phoneTextBox.Text = contact.PhoneNumber.Phone;
+                lastNameTextBox.Text = selectedContact.LastName;
+                firstNameTextBox.Text = selectedContact.FirstName;
+                birthDateTimePicker.Value = selectedContact.BirthDate;
+                emailTextBox.Text = selectedContact.Email;
+                VKTextBox.Text = selectedContact.ID_VK;
+                phoneTextBox.Text = selectedContact.PhoneNumber.Phone;
+            }
         }
 
         /// <summary>
@@ -263,5 +341,7 @@ namespace ContactsAppUI
             birthdayPanel.Visible = false;
             timer1.Stop();
         }
+
+        private void SearchTextBox_TextChanged(object sender, EventArgs e) => CreateContactList();
     }
 }

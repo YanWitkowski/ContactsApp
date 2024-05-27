@@ -62,18 +62,7 @@ namespace ContactsApp
         /// <returns>Отсортированный список контактов.</returns>
         private List<Contact> SortList(List<Contact> list)
         {
-            for (int index1 = 0; index1 < list.Count - 1; ++index1)
-            {
-                for (int index2 = index1 + 1; index2 < list.Count; ++index2)
-                {
-                    if (list[index1].ToString().CompareTo(list[index2].ToString()) > 0)
-                    {
-                        Contact contact = list[index1];
-                        list[index1] = list[index2];
-                        list[index2] = contact;
-                    }
-                }
-            }
+            list.Sort((contact1, contact2) => contact1.ToString().CompareTo(contact2.ToString()));
             return list;
         }
 

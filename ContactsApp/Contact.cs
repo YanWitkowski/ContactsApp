@@ -268,7 +268,7 @@ namespace ContactsApp
         /// <returns>Строка с именем контакта.</returns>
         public override string ToString()
         {
-            return $"{FirstName} {LastName}";
+            return $"{LastName}";
         }
     }
 }

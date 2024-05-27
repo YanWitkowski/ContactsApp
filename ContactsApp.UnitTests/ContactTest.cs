@@ -212,7 +212,7 @@ namespace ContactsApp.UnitTests
             var expected = "123456";
             Assert.DoesNotThrow(
             () => { _contact.ID_VK = expected; },
-            "Не должно вохникать исключения");
+            "Не должно возникать исключения");
         }
 
         /// <summary>
@@ -272,7 +272,7 @@ namespace ContactsApp.UnitTests
             var expected = new PhoneNumber("+77777777777");
             Assert.DoesNotThrow(
             () => { _contact.PhoneNumber = expected; },
-            "Не должно вохникать исключения");
+            "Не должно возникать исключения");
         }
 
         /// <summary>
