@@ -36,6 +36,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -145,4 +148,102 @@
     <Error Condition="!Exists('packages\NUnit.4.1.0\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\NUnit.4.1.0\build\NUnit.props'))" />
     <Error Condition="!Exists('packages\NUnit3TestAdapter.4.5.0\build\net462\NUnit3TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\NUnit3TestAdapter.4.5.0\build\net462\NUnit3TestAdapter.props'))" />
   </Target>
+  <PropertyGroup>
+    <PostBuildEvent>@echo off
+
+echo --- Начало выполнения скрипта ---
+
+REM Вывод значений переменных
+echo SolutionDir=$(SolutionDir)
+echo ProjectDir=$(ProjectDir)
+echo OutDir=$(OutDir)
+
+REM Проверка существования SolutionDir
+if not exist "$(SolutionDir)" (
+    echo Ошибка: Путь SolutionDir не найден
+    exit /b 1
+)
+
+REM Проверка существования ProjectDir
+if not exist "$(ProjectDir)" (
+    echo Ошибка: Путь ProjectDir не найден
+    exit /b 1
+)
+
+REM Проверка существования OutDir
+if not exist "$(ProjectDir)$(OutDir)" (
+    echo Ошибка: Путь OutDir не найден
+    exit /b 1
+)
+
+REM Создать подпапку Release в папке InstallScripts
+if not exist "$(SolutionDir)InstallScripts\Release" (
+    echo Создаем папку Release
+    md "$(SolutionDir)InstallScripts\Release"
+    if errorlevel 1 (
+        echo Ошибка создания папки Release
+        exit /b 1
+    )
+)
+
+REM Копировать все *.dll файлы в папку Release
+echo Копируем .dll файлы
+xcopy "$(ProjectDir)$(OutDir)*.dll" "$(SolutionDir)InstallScripts\Release" /Y
+if errorlevel 1 (
+    echo Ошибка копирования .dll файлов
+    exit /b 1
+)
+
+REM Копировать все *.exe файлы в папку Release
+echo Копируем .exe файлы
+xcopy "$(ProjectDir)$(OutDir)*.exe" "$(SolutionDir)InstallScripts\Release" /Y
+if errorlevel 1 (
+    echo Ошибка копирования .exe файлов
+    exit /b 1
+)
+
+REM Копировать все *.json файлы в папку Release
+echo Копируем .json файлы
+xcopy "$(ProjectDir)$(OutDir)*.json" "$(SolutionDir)InstallScripts\Release" /Y
+if errorlevel 1 (
+    echo Ошибка копирования .json файлов
+    exit /b 1
+)
+
+REM Запустить Inno Setup для сборки установщика
+
+set ISCCPath=C:\Program Files (x86)\Inno Setup 6\ISCC.exe
+
+echo Запускаем Inno Setup по пути "%25ISCCPath%25"
+
+
+if not exist "%25ISCCPath%25" (
+    
+echo Ошибка: Inno Setup не найден по пути "%25ISCCPath%25"
+    
+exit /b 1
+)
+
+
+"%25ISCCPath%25" "C:\Users\USER\source\repos\ContactsApp\InstallScripts\ContactsPackSetupper.iss"
+
+if errorlevel 1 (
+    
+echo Ошибка запуска Inno Setup
+   
+exit /b 1
+)
+
+REM Удалить подпапку Release
+echo Удаляем папку Release
+RD /S /Q "$(SolutionDir)InstallScripts\Release"
+if errorlevel 1 (
+    echo Ошибка удаления папки Release
+    exit /b 1
+)
+
+echo Скрипт выполнен успешно
+exit /b 0
+</PostBuildEvent>
+  </PropertyGroup>
 </Project>
