@@ -2,24 +2,24 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Contacts App"
-#define MyAppVersion "1.0"
+#define MyAppVersion "1.3"
 #define MyAppExeName "ContactsAppUI.exe"
+#define MyAppAssocExt ".myp"
 #define MyAppPath "..\ContactsAppUI\bin\Release"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId={{422F8999-836B-4F6A-AB00-0385C060F6F8}
+AppId={{A9AAA18E-21C1-4D50-B28D-B2FB903356A9}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 ;AppVerName={#MyAppName} {#MyAppVersion}
-
 DefaultDirName={autopf}\{#MyAppName}
 ChangesAssociations=yes
 DisableProgramGroupPage=yes
 ; Uncomment the following line to run in non administrative install mode (install for current user only.)
 ;PrivilegesRequired=lowest
-OutputBaseFilename=ContactsAppSetup
+OutputBaseFilename=Contacts App setup
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
@@ -32,19 +32,24 @@ Name: "russian"; MessagesFile: "compiler:Languages\Russian.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
+[Files]
 Source: "{#MyAppPath}\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#MyAppPath}\ContactsApp.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#MyAppPath}\ContactsAppUI.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#MyAppPath}\ContactsAppUI.exe.config"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#MyAppPath}\Newtonsoft.Json.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#MyAppPath}\nunit.engine.api.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#MyAppPath}\nunit.engine.core.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#MyAppPath}\nunit.engine.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#MyAppPath}\nunit.framework.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#MyAppPath}\nunit.framework.legacy.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#MyAppPath}\nunit.framework.xml"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#MyAppPath}\NUnit3.TestAdapter.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#MyAppPath}\Save.json"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#MyAppPath}\System.Threading.Tasks.Extensions.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#MyAppPath}\testcentric.engine.metadata.dll"; DestDir: "{app}"; Flags: ignoreversion
+; NOTE: Don't use "Flags: ignoreversion" on any shared system files
+
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
@@ -53,3 +58,4 @@ Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: de
 
 [Run]
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
+

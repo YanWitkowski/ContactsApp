@@ -14,6 +14,8 @@ namespace ContactsApp
     /// </summary>
     public class Contact : ICloneable
     {
+        private static int nextId = 1;
+        public int Id { get; private set; }
         private string _lastName;
         private string _firstName;
         private DateTime _birthDate;
@@ -32,6 +34,7 @@ namespace ContactsApp
         /// <param name="phoneNumber">Номер телефона</param>
         public Contact(string lastName, string firstName, DateTime birthDate, string email, string idVk, PhoneNumber phoneNumber)
         {
+            Id = nextId++;
             LastName = lastName;
             FirstName = firstName;
             BirthDate = birthDate;
